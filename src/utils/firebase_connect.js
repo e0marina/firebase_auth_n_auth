@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import env from 'react-dotenv';
 
-// TODO: Replace the following with your app's Firebase project configuration
+//Firebase project configuration
 
 const firebaseConfig = {
   apiKey: env.API_KEY,
@@ -13,3 +13,5 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+export default app;
