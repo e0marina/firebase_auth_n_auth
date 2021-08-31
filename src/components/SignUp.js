@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import app from '../utils/firebase';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 function SignUp() {
   const initialInputState = {
@@ -13,9 +15,23 @@ function SignUp() {
     setEachEntry({ ...eachEntry, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, email, password) => {
     e.preventDefault();
-    console.log(eachEntry);
+    console.log(email, password);
+    // console.log(eachEntry);
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(`USER: ${user}`);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
+      });
   };
 
   return (
