@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 3001;
 const app = express();
+var admin = require('firebase-admin');
 require('dotenv').config();
 
 //data parsing
@@ -24,6 +25,11 @@ app.get('/', function (req, res) {
 // Define any API routes before this runs
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, './client/build/index.html'));
+});
+
+admin.initializeApp({
+  credential: admin.credential.applicationDefault(),
+  databaseURL: 'https://testingptchat.firebaseio.com',
 });
 
 app.listen(PORT, function () {

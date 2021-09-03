@@ -7,11 +7,12 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [select, setSelect] = useState('');
   const [user, loading, error] = useAuthState(auth);
   const history = useHistory();
   const register = () => {
     if (!name) alert('Please enter name');
-    registerWithEmailAndPassword(name, email, password);
+    registerWithEmailAndPassword(name, email, password, select);
   };
   useEffect(() => {
     if (loading) return;
@@ -41,6 +42,17 @@ function Register() {
           onChange={(e) => setPassword(e.target.value)}
           placeholder='Password'
         />
+        <label for='levels'>Choose access level:</label>
+        <select
+          id='levels'
+          name='levels'
+          // value={select}
+          onChange={(e) => setSelect(e.target.value)}
+        >
+          <option value='superuser'>Super User</option>
+          <option value='admin'>Admin</option>
+          <option value='user'>User</option>
+        </select>
         <button className='register__btn' onClick={register}>
           Register
         </button>
