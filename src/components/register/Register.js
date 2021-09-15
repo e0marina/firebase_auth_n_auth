@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useHistory } from 'react-router-dom';
-import { auth, registerWithEmailAndPassword } from '../firebase';
+import { auth, registerWithEmailAndPassword } from '../../firebase';
 import './Register.css';
 function Register() {
   const [email, setEmail] = useState('');

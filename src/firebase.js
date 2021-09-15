@@ -1,15 +1,14 @@
 import firebase from 'firebase';
-import env from 'react-dotenv';
 
 //Firebase project configuration
 
 const firebaseConfig = {
-  apiKey: env.API_KEY,
-  authDomain: env.AUTH_DOMAIN,
-  projectId: env.PROJECT_ID,
-  storageBucket: env.STORAGE_BUCKET,
-  messagingSenderId: env.MESSAGING_SENDER_ID,
-  appId: env.APP_ID,
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 const app = firebase.initializeApp(firebaseConfig);
@@ -25,7 +24,7 @@ const signInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (name, email, password) => {
+const registerWithEmailAndPassword = async (name, email, password, select) => {
   try {
     const res = await auth.createUserWithEmailAndPassword(email, password);
     const user = res.user;
@@ -34,6 +33,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
       name,
       authProvider: 'local',
       email,
+      select,
     });
   } catch (err) {
     console.error(err);
